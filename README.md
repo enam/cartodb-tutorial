@@ -1,21 +1,18 @@
 CartoDB Tutorial
 ================
-Parsons, The New School For Design  
-August 9, 2014
+## What is this Tutorial about?
 
-## About Me
+Mapping data interactively on the web using the free open-source software CartoDB. 
 
-I ([Chris Henrick](https://twitter.com/chrislhenrick)) have a professional background in Cartography and Geographic Information Systems. In undergrad I studied human geography, urban studies and fine art. Recently I have been working in front-end web development, data visualization and interactive web-mapping.
+To view the slides for the presentation open [this link](http://clhenrick.github.io/cartodb-tutorial/slide-show/index.html) in a new tab or window in your browser and use the ◀ ▶ keys to navigate.
 
-## What is this Dorkshop about?
+## Examples / Use Cases:
 
-Mapping data interactively on the web using the free open-source software called CartoDB. 
-
-### Examples / Use Cases:
+Here are some examples of how people have used CartoDB to create interactive maps:
 
 - [The Spatial Distribution of Swiss Soccer Fans](http://www.tagesanzeiger.ch/extern/interactive/2014/fankarte/)
 - [Where Would 9 million displaced Syrians fit?](http://projects.aljazeera.com/2013/syrias-refugees/index.html)
-- [The Geography of Abortion Access](http://www.thedailybeast.com/articles/2013/01/22/interactive-map-america-s-abortion-clinics.html	)
+- [The Geography of Abortion Access](http://www.thedailybeast.com/articles/2013/01/22/interactive-map-america-s-abortion-clinics.html )
 - [Andrew Hill's NYC PLUTO data tour](http://andrewxhill.com/cartodb-examples/scroll-story/pluto/#0)
 - [Anti-Eviction Mapping Project](http://www.antievictionmappingproject.net/ellis.html)
 - [Tweets about Beyonce's latest album release](http://www.huffingtonpost.com/2013/12/16/beyonce-twitter_n_4455491.html)
@@ -25,13 +22,13 @@ Mapping data interactively on the web using the free open-source software called
 
 ![](./img/cartodb-home.jpg)
 
-CartoDB is a platform running on open-source software for visualizing and analzying data on interactive web-maps. It is perhaps the easiest method of mapping geospatial data for the web. It also allows for high cartographic customization through an intuitive user interface as well as advanced geospatial data analysis using [SQL](http://en.wikipedia.org/wiki/Sql) (Structured Queried Language) and [Post-GIS](http://boundlessgeo.com/solutions/solutions-software/postgis/).
+CartoDB is a platform running on open-source software for visualizing and analzying geospatial data on the web. It is perhaps the easiest method of creating interactive maps on the web. CartoDB allows for high cartographic customization through an intuitive user interface as well as advanced geospatial data analysis using [SQL](http://en.wikipedia.org/wiki/Sql) (Structured Queried Language) and [Post-GIS](http://boundlessgeo.com/solutions/solutions-software/postgis/).
 
-Prior to CartoDB (and other opensource web-cartography software such as [Tile Mill](https://www.mapbox.com/tilemill/)), creating webmaps involved having to have your very own web server and install both server-side and database software. This was _extremely difficult_ unless you were a experienced computer programmer / back-end web developer. The great thing about CartoDB is that it handles all of the server side stuff for you. For example, each time you import data into CartoDB that data is automatically stored inside a database that has _geospatial_ capabilities.
+Prior to CartoDB (and other opensource web-cartography software such as [Tile Mill](https://www.mapbox.com/tilemill/)), creating webmaps involved having to run your very own web server and install both server-side and database software. This was _extremely difficult_ unless you were a experienced computer programmer / back-end web developer. The great thing about CartoDB is that it handles all of the server side stuff for you. For example, each time you import data into CartoDB that data is automatically stored inside a database that has _geospatial_ capabilities.
 
-### Geospatial? Wait, what???
+### Geospatial? Wait, what's that???
 
-__Geospatial data__ refers to data that has a location based, geometric component. Most geospatial data is in _vector format_ and is stored as points, lines and polygons whose vertices have real world x, y coordinates such as latitude and longitude. In [GIS](http://en.wikipedia.org/wiki/Geographic_information_system), geospatial data can be used to represent both physical and cultural features. These data can then be cartographically rendered and analyzed to solve problems and model the enviroment. 
+__Geospatial data__ refers to data that has a location based, geometric component. Most geospatial data is in _vector format_ and is stored as points, lines and polygons whose geometric attributes such as vertices have references to physical space in the real world such as latitude and longitude coordinates. With a [Geographic Information System](http://en.wikipedia.org/wiki/Geographic_information_system), geospatial data can be used to represent both physical and cultural features. These data can then be cartographically rendered and spatially analyzed to solve problems and model the enviroment. 
 
 ### Examples of Geometry Types:
 
@@ -53,9 +50,9 @@ These types of data are used to render __map tiles__ like those you see on [Open
 
 ![](./img/tiles.gif)
 
-Map tiles are small 256 x 256 pixel images that are "tiled" together in a grid like and pyramid fashion. They are broken up this way to make zooming and panning appear seamless and fluid by the web-map user. Only the images inside and just outside the map area the user is looking at are being rendered. The server is told to render neighboring tiles and to _cache_ them so that when you pan to a new area the interaction appears seamless. 
+Map tiles are small 256 x 256 pixel images that are aligned in a grid like, pyramid fashion. They are broken up this way to make zooming and panning appear seamless and fluid by the web-map user. Only the images inside and just outside the map area the user is looking at are being rendered. The server is told to render neighboring tiles and to _cache_ them so that when you pan to a new area the interaction appears seamless. 
 
-For web mapping map tiles form our _basemap_ that we can overlay _custom data_ on top of. Even more though, we can _analyze_ our geospatial data with CartoDB. This is where the fun comes in :)
+For the purposes of this tutorial map tiles form our _basemap_ that we can overlay _custom data_ on top of. Even more though, we can _analyze_ our geospatial data with CartoDB. Both of these abilities are where the fun comes in :)
 
 ### Analyzing Geospatial data with PostGIS
 
@@ -133,16 +130,16 @@ __Here you may:__
 
     - Fortunately our data already has this value included in the `pop_sqkm` column. To show how you could compute it on your own we would do the following in the __*SQL Panel*__:
     
-	    ```
-	    SELECT pop_sqkm, 
-	    	round(
-	    		pop / 
-	    		(ST_Area(the_geom::geography)/1000000)) 
-	    	as psqkm 
-	    	FROM us_counties
-	    ```
-	    
-	 - This is an example of using the open-source technology *PostGIS* to spatially analyze our data. With PostGIS we can calculate values such as distance and area, where different spatial datasets interesect each other, as well as export our data to different data formats such as *GeoJSON* or *Shapefile*. 
+      ```
+      SELECT pop_sqkm, 
+        round(
+          pop / 
+          (ST_Area(the_geom::geography)/1000000)) 
+        as psqkm 
+        FROM us_counties
+      ```
+      
+   - This is an example of using the open-source technology *PostGIS* to spatially analyze our data. With PostGIS we can calculate values such as distance and area, where different spatial datasets interesect each other, as well as export our data to different data formats such as *GeoJSON* or *Shapefile*. 
 
 ### Making a Thematic Point Map
 
@@ -163,7 +160,7 @@ __So now we:__
 
 1. Use the same tornado data from above.
 
-2. Demo the Torque option in the Visualization Wizard by selecting the `date` column for the temporal value to animate.	
+2. Demo the Torque option in the Visualization Wizard by selecting the `date` column for the temporal value to animate. 
 
 ### Making a Multi-Layered Data Cake
 
@@ -174,13 +171,13 @@ Let's combine both the Counties and Tornadoes datasets into a new visualization.
 - Then in the SQL Panel run the following query (this assumes your tornado data table is named `tornadoes`)
 
   ```
-	UPDATE us_counties 
-	  SET tornadoes_by_county = 
-	  (
-	      SELECT count(1) 
-	      FROM tornadoes 
-	      WHERE st_contains(us_counties.the_geom,tornadoes.the_geom) 
-	  )
+  UPDATE us_counties 
+    SET tornadoes_by_county = 
+    (
+        SELECT count(1) 
+        FROM tornadoes 
+        WHERE st_contains(us_counties.the_geom,tornadoes.the_geom) 
+    )
   ```
 - In the visualization wizard for the us_counties layer try changing the category to choropleth and using the column `tornadoes_by_county` to style the map. 
 
@@ -219,7 +216,14 @@ For using the CartoDB API. Requires a basic knowledge of Javascript for the web.
 
 ### Geospatial data sources
 A few places you may grab geospatial data from and use in CartoDB:  
-1. [Natural Earth Data](http://www.naturalearthdata.com/): 3 levels of small-scale cultural and physical data, world coverage.2. [Metro Extracts](http://metro.teczno.com/): OpenStreetMap extracts of urban areas converted to shapefile and other formats.4. [OpenStreetMapData.com](http://openstreetmap-data.com/data): OSM Land, Water, Coastline data5. [Open Data NYC](https://nycopendata.socrata.com/) All sorts of goodies like 311 data. Much of the data here is already georeferenced but some is not*.6. [US National Weather Service](http://www.nws.noaa.gov/geodata/) (NOAA) 7. [U.S. Census](http://www.census.gov/2010census/data/): Demographic data for the U.S.__*Note / Tip:__  Any dataset that has a spatial attribute, (such as street addresses, county names, state / province names, country names, zipcodes, IP addresses, etc.) but that doesn't have a geometry data type can be _georeferenced_ to geospatial data that does have a geometry. Typically the preferred format to work with this type of data is CSV (comma separated value) but CartoDB also allows for importing Microsoft Excel tables. _Make sure your data's first row are column names and that these names don't contain numbers or special characters as the first character of the column name._
-## Happy Mapping!
+1. [Natural Earth Data](http://www.naturalearthdata.com/): 3 levels of small-scale cultural and physical data, world coverage.
+2. [Metro Extracts](http://metro.teczno.com/): OpenStreetMap extracts of urban areas converted to shapefile and other formats.
+4. [OpenStreetMapData.com](http://openstreetmap-data.com/data): OSM Land, Water, Coastline data
+5. [Open Data NYC](https://nycopendata.socrata.com/) All sorts of goodies like 311 data. Much of the data here is already georeferenced but some is not*.
+6. [US National Weather Service](http://www.nws.noaa.gov/geodata/) (NOAA) 
+7. [U.S. Census](http://www.census.gov/2010census/data/): Demographic data for the U.S.
 
+__*Note / Tip:__  
+Any dataset that has a spatial attribute, (such as street addresses, county names, state / province names, country names, zipcodes, IP addresses, etc.) but that doesn't have a geometry data type can be _georeferenced_ to geospatial data that does have a geometry. Typically the preferred format to work with this type of data is CSV (comma separated value) but CartoDB also allows for importing Microsoft Excel tables. _Make sure your data's first row are column names and that these names don't contain numbers or special characters as the first character of the column name._
 
+*__Happy Mapping!__*
