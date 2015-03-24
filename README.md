@@ -4,7 +4,7 @@ CartoDB Tutorial
 
 Mapping data interactively on the web using the free open-source software CartoDB. 
 
-To view the slides for the presentation open [this link](http://maptime.github.io/cartodb-tutorial/index.html) in a new tab or window in your browser and use the ◀ ▶ keys to navigate.
+To view the slides for the presentation open [this link](http://enam.github.io/cartodb-tutorial/index.html) in a new tab or window in your browser and use the ◀ ▶ keys to navigate.
 
 ## Examples / Use Cases:
 
