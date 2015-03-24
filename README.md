@@ -9,9 +9,8 @@ To view the slides for the presentation open [this link](http://enam.github.io/c
 ## Examples / Use Cases:
 
 Here are some examples of how people have used CartoDB to create interactive maps:
-- [CartoDB Map Gallery](http://cartodb.com/gallery/)
-
-- [The Spatial Distribution of Swiss Soccer Fans](http://www.tagesanzeiger.ch/extern/interactive/2014/fankarte/)
+- [CartoDB Map Gallery](http://cartodb.com/gallery)
+- [The Spatial Distribution of Swiss Soccer Fans](http://www.tagesanzeiger.ch/extern/interactive/2014/fankarte)
 - [Where Would 9 million displaced Syrians fit?](http://projects.aljazeera.com/2013/syrias-refugees/index.html)
 - [Andrew Hill's NYC PLUTO data tour](http://andrewxhill.com/cartodb-examples/scroll-story/pluto/#0)
 - [Anti-Eviction Mapping Project](http://www.antievictionmappingproject.net/ellis.html)
