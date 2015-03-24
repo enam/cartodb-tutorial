@@ -69,11 +69,11 @@ We will cover some basic PostGIS in this tutorial though if you are interested y
 
 ### Intro to the CartoDB Dashboard
 
-1. Create a free account and log into CartoDB. Once logged in and viewing the dashboard, click on the `common data` option, then click on `populated places`. This will add the `populated places` dataset to your account. Once the data has been imported take a look at the  `adm0cap field` in the __table view__. This field stores 0's and 1's, the latter meaning the place is a country capital.
+1. Create a free account and log into CartoDB. Once logged in and viewing the dashboard, click on the `common data` option, then click on `Cultural datasets` -> `populated places`. This will add the `populated places` dataset to your account. Once the data has been imported take a look at the  `adm0cap field` in the __table view__. This field stores 0's and 1's, the latter meaning the place is a country capital.
 
 2. A walk through the GUI:
     - When inspecting data in CartoDB there are two ways to view it: 
-      - __Table View__: Shows column names & rows much like a spreadsheet. For this dataset each row represents a point. But rows may also represent other geometry types depending on your data.
+      - __Data View__: Shows column names & rows much like a spreadsheet. For this dataset each row represents a point. But rows may also represent other geometry types depending on your data.
         - Take a look at what's inside the cells in `the_geom` column, You should see `lattitude` and `longitude` coordinates.
       - __Map View__: Allows for inspecting our data visually, eg: zooming and panning on an interactive web map. From here we can change the style of the base map, use the *Visualization Wizard* in the side bar to style our data and add interaction such as pop-ups that display values from the columns in our table view. 
       
@@ -131,7 +131,7 @@ __Here you may:__
     - Fortunately our data already has this value included in the `pop_sqkm` column. To show how you could compute it on your own we would do the following in the __*SQL Panel*__:
     
       ```
-      SELECT pop_sqkm, 
+      SELECT *, 
         round(
           pop / 
           (ST_Area(the_geom::geography)/1000000)) 
@@ -145,9 +145,8 @@ __Here you may:__
 
 1. Import this tornado data: `http://acdmy.org/d/tornadoes.zip`.
 
-2. Inspect the data. Because this data is in CSV format all of our *data types* are stored as *strings* (a string is a data type for storing text, like a sentence or word). In order to use the *numeric* and *date* values in this data we need to convert the following columns' to their respective data types by clicking on the small carrot next to the column name, then clicking on *"Change data type..."*  
+2. Inspect the data. Because this data is in CSV format some of our *data types* may be stored as *strings* (a string is a data type for storing text, like a sentence or word). In the case of this dataset, CartoDB appropriately types our numeric data, but our *date* values need to be converted by clicking on *"Change data type..."*  
 __So now we:__
-    - convert the `damage` column's data type to *number*.
     - convert the `date` column's data type to *date*.
         
 3. In the map view use the Visualization Wizard to show our data's `damage` value in different methods such as Bubble Map, Intensity, Density Map, etc.
